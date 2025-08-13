@@ -30,7 +30,7 @@ export default function RootLayout({
       <body
         className={` ${lato.variable} ${abrilFatface.variable} antialiased`}
       >
-        <div className="sticky top-0">
+        <div className="sticky top-0 z-50 bg-white">
           <Navbar />
         </div>
         {children}
