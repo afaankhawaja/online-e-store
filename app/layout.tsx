@@ -3,8 +3,6 @@ import { Lato, Abril_Fatface } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 
-
-
 const lato = Lato({
   variable: "--font-lato",
   subsets: ["latin"],
@@ -33,7 +31,7 @@ export default function RootLayout({
         className={` ${lato.variable} ${abrilFatface.variable} antialiased`}
       >
         <div className="sticky top-0">
-        <Navbar/>
+          <Navbar />
         </div>
         {children}
       </body>
