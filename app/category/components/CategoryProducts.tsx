@@ -29,7 +29,7 @@ const CategoryProducts = ({ category }: CategoryProductsProps) => {
       const productsWithQuantity = products.map((prod: any) => {
         return {
           ...prod,
-          quantity: 0,
+          quantity: 1,
         };
       });
       setProducts(productsWithQuantity);
@@ -41,7 +41,7 @@ const CategoryProducts = ({ category }: CategoryProductsProps) => {
     setProducts((prevProds) =>
         prevProds.map((prod) =>
             prod.id === id
-          ? { ...prod, quantity: Math.max(prod.quantity + delta, 0) }
+          ? { ...prod, quantity: Math.max(prod.quantity + delta, 1) }
           : prod,
       ),
     );
