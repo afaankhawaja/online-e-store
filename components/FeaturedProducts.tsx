@@ -48,7 +48,7 @@ export default function FeaturedProducts() {
         {list.map((item, index) => (
           /* eslint-disable no-console */
           <Card
-            className="flex-col"
+            className="flex-col hover:cursor-pointer"
             key={index}
             shadow="sm"
             onPress={() => console.log("item pressed")}
@@ -64,7 +64,7 @@ export default function FeaturedProducts() {
                 height="100%"
               />
             </CardBody>
-            <CardFooter className="text-small flex-col items-start text-start max-w-44">
+            <CardFooter className="text-small flex-col gap-y-1 mt-2 items-start text-start max-w-44">
               <b>{item.title}</b>
               <p className="text-default-500">{item.price}</p>
             </CardFooter>
