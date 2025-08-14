@@ -26,10 +26,26 @@ const CategoryProducts = ({ category }: CategoryProductsProps) => {
       );
       const data = await response.json();
       const products = data.products;
-      setProducts(products);
+      const productsWithQuantity = products.map((prod: any) => {
+        return {
+          ...prod,
+          quantity: 0,
+        };
+      });
+      setProducts(productsWithQuantity);
     };
     fetchProducts();
   }, [categoryName]);
+
+  const updateQuantity = (id: string, delta: number) => {
+    setProducts((prevProds) =>
+        prevProds.map((prod) =>
+            prod.id === id
+          ? { ...prod, quantity: Math.max(prod.quantity + delta, 0) }
+          : prod,
+      ),
+    );
+  };
   if (!products) return <div>loading products ...</div>;
   return (
     <section className="px-32 pt-10 h-full">
@@ -73,10 +89,23 @@ const CategoryProducts = ({ category }: CategoryProductsProps) => {
                 </p>
                 <div className="flex justify-between w-full pr-10">
                   <p className="text-default-500">{item.price}</p>{" "}
-                  <div className="flex gap-x-3">
-                    <ShoppingCart />{" "}
-                    <span className="flex">
-                      <Plus /> {0} <Minus />
+                  <div className="flex gap-x-3 text-[12px] items-center">
+                    <ShoppingCart size={16} />{" "}
+                    <span className="flex items-center ">
+                      <Plus
+                        size={16}
+                        id="add"
+                        onClick={(e) => updateQuantity(item.id, 1)}
+                      />{" "}
+                      <span className="border px-2 bg-gray -100">
+                        {item.quantity}
+                      </span>{" "}
+                      <Minus
+                        size={16}
+                        className=""
+                        id="subtract"
+                        onClick={() => updateQuantity(item.id, -1)}
+                      />
                     </span>
                   </div>{" "}
                 </div>
