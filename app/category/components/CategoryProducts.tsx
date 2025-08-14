@@ -10,13 +10,24 @@ import {
 } from "@heroui/react";
 import SelectOptions from "@/components/ui/Select";
 import { Minus, Plus, ShoppingCart } from "lucide-react";
+import { useAtom } from "jotai";
+import { cartAtom } from "@/atoms/cart-atom";
 
 interface CategoryProductsProps {
   category: string;
 }
 
+interface Cart {
+  id: string;
+  title: string;
+  price: number;
+  quantity: number;
+  img: string;
+}
+
 const CategoryProducts = ({ category }: CategoryProductsProps) => {
   const [products, setProducts] = useState<any[]>([]);
+  const [cartItems, setCartItems] = useAtom(cartAtom);
   const categoryName =
     category.charAt(0).toLocaleLowerCase() + category.slice(1);
   useEffect(() => {
@@ -39,12 +50,39 @@ const CategoryProducts = ({ category }: CategoryProductsProps) => {
 
   const updateQuantity = (id: string, delta: number) => {
     setProducts((prevProds) =>
-        prevProds.map((prod) =>
-            prod.id === id
+      prevProds.map((prod) =>
+        prod.id === id
           ? { ...prod, quantity: Math.max(prod.quantity + delta, 1) }
           : prod,
       ),
     );
+  };
+
+  const handleAddToCart = (item: any) => {
+    setCartItems((prevItems: Cart[]) => {
+      const alreadyExist = prevItems.find((prod) => prod.id === item.id);
+      if (alreadyExist) {
+        return prevItems.map((prod) =>
+          prod.id === item.id
+            ? {
+                ...prod,
+                quantity: prod.quantity + item.quantity,
+              }
+            : prod,
+        );
+      } else {
+        return [
+          ...prevItems,
+          {
+            id: item.id,
+            title: item.title,
+            quantity: item.quantity,
+            price: item.price,
+            img: item.images[0],
+          },
+        ];
+      }
+    });
   };
   if (!products) return <div>loading products ...</div>;
   return (
@@ -90,7 +128,10 @@ const CategoryProducts = ({ category }: CategoryProductsProps) => {
                 <div className="flex justify-between w-full pr-10">
                   <p className="text-default-500">{item.price}</p>{" "}
                   <div className="flex gap-x-3 text-[12px] items-center">
-                    <ShoppingCart size={16} />{" "}
+                    <ShoppingCart
+                      onClick={() => handleAddToCart(item)}
+                      size={16}
+                    />{" "}
                     <span className="flex items-center ">
                       <Plus
                         size={16}

@@ -3,6 +3,7 @@ import { Lato, Abril_Fatface } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { Provider } from "jotai";
 
 const lato = Lato({
   variable: "--font-lato",
@@ -31,11 +32,13 @@ export default function RootLayout({
       <body
         className={` ${lato.variable} ${abrilFatface.variable} antialiased`}
       >
-        <div className="sticky top-0 z-50 bg-white">
-          <Navbar />
-        </div>
-        {children}
-        <Footer />
+        <Provider>
+          <div className="sticky top-0 z-50 bg-white">
+            <Navbar />
+          </div>
+          {children}
+          <Footer />
+        </Provider>
       </body>
     </html>
   );
