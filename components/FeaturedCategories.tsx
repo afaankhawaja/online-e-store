@@ -1,17 +1,19 @@
 "use client";
 import { Card, CardBody, CardFooter, Image } from "@heroui/react";
+import { useRouter } from "next/navigation";
 export default function FeaturedCategories() {
+  const router = useRouter();
   const list = [
     {
       title: "Beauty",
       img: "images/beauty.jpg",
     },
     {
-      title: "Fragrance",
+      title: "Fragrances",
       img: "images/fragrance.jpg",
     },
     {
-      title: "groceries",
+      title: "Groceries",
       img: "images/groceries.jpg",
     },
   ];
@@ -27,7 +29,7 @@ export default function FeaturedCategories() {
             key={index}
             isPressable
             shadow="sm"
-            onPress={() => console.log("item pressed")}
+            onPress={() => router.push(`category/${item.title}`)}
           >
             <CardBody className="overflow-visible p-0 rounded-xl">
               <Image
