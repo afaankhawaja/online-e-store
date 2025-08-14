@@ -1,7 +1,10 @@
+"use client";
 import { Search, ShoppingBag } from "lucide-react";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 const Navbar = () => {
+  const router = useRouter();
   return (
     <nav className="py-4 px-10 shadow-md">
       <div className="flex justify-between items-center">
@@ -23,7 +26,7 @@ const Navbar = () => {
         </div>
         <div className="flex items-center space-x-4">
           <Search size={20} />
-          <ShoppingBag size={20} />
+          <ShoppingBag onClick={() => router.push("/cart")} size={20} />
         </div>
       </div>
     </nav>
