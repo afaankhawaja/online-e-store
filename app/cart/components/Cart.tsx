@@ -1,16 +1,24 @@
 "use client";
 import { cartAtom } from "@/atoms/cart-atom";
 import { useAtom } from "jotai";
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import Image from "next/image";
 import { Button } from "@heroui/button";
 import { loadStripe } from "@stripe/stripe-js";
+import { Minus, Plus, Trash } from "lucide-react";
 
+interface CartItems {
+  id: string;
+  title: string;
+  price: number;
+  quantity: number;
+  img: string;
+}
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!,
 );
 const Cart = () => {
-  const [cartItems] = useAtom(cartAtom);
+  const [cartItems, setCartItems] = useAtom(cartAtom);
   const SubTotal = useMemo(() => {
     const sum = cartItems.reduce((acc, curr) => {
       acc = acc + curr.price * curr.quantity;
@@ -36,6 +44,26 @@ const Cart = () => {
     const stripe = await stripePromise;
     if (stripe) stripe.redirectToCheckout({ sessionId });
   };
+
+  const updateQuantity = (id: string, delta: number) => {
+    setCartItems((prevItems: CartItems[]) =>
+      prevItems.map((item) =>
+        item.id === id
+          ? {
+              ...item,
+              quantity: Math.max(item.quantity + delta, 1),
+            }
+          : item,
+      ),
+    );
+  };
+
+  const handleDelete = (id: string) => {
+    setCartItems((prevItems: CartItems[]) =>
+      prevItems.filter((item) => item.id !== id),
+    );
+  };
+
   return (
     <section className="px-52 mt-20 min-h-[calc(100vh-370px)]">
       <h1 className="text-3xl">Your Cart</h1>
@@ -54,16 +82,40 @@ const Cart = () => {
                 </div>
                 <div className="flex-col">
                   <p className="text-[14px] font-semibold">{item.title}</p>
-                  <p className="text-[12px]">Quantity : {item.quantity}</p>
+                  <div className="flex gap-x-1 text-[12px] items-center">
+                    <span className="flex items-center gap-x-4 ">
+                      <span className="">Quantity : {item.quantity}</span>{" "}
+                      <span className="flex gap-x-1">
+                        <Plus
+                          size={14}
+                          id="add"
+                          onClick={(e) => updateQuantity(item.id, 1)}
+                        />{" "}
+                        <Minus
+                          size={14}
+                          className=""
+                          id="subtract"
+                          onClick={() => updateQuantity(item.id, -1)}
+                        />
+                        <Trash
+                          color="red"
+                          size={14}
+                          className=""
+                          id="delete"
+                          onClick={() => handleDelete(item.id)}
+                        />
+                      </span>
+                    </span>
+                  </div>{" "}
                 </div>
               </div>
               <div>
-                <p>{item.price}</p>{" "}
+                <p>{item.price.toFixed(2)}</p>{" "}
                 <p className="-ml-4">
                   <span className="text-black/70 text-[12px]">
                     x{item.quantity}
                   </span>{" "}
-                  {item.price * item.quantity}
+                  {(item.price * item.quantity).toFixed(2)}
                 </p>
               </div>
             </div>
@@ -76,7 +128,7 @@ const Cart = () => {
       <div className="flex justify-end mt-5 ">
         <Button
           onClick={handleCheckout}
-          className="bg-amber-600 text-white/70 hover:bg-amber-500 px-3 py-2 font-semibold"
+          className="bg-amber-600 text-white/70 hover:text-white hover:bg-amber-500 px-3 py-2 font-semibold"
           size="lg"
           color="secondary"
           variant="shadow"
