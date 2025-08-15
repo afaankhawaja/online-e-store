@@ -4,7 +4,11 @@ import { useAtom } from "jotai";
 import React, { useMemo } from "react";
 import Image from "next/image";
 import { Button } from "@heroui/button";
+import { loadStripe } from "@stripe/stripe-js";
 
+const stripePromise = loadStripe(
+  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!,
+);
 const Cart = () => {
   const [cartItems] = useAtom(cartAtom);
   const SubTotal = useMemo(() => {
@@ -14,6 +18,24 @@ const Cart = () => {
     }, 0);
     return sum.toFixed(2);
   }, [cartItems]);
+
+  const stripeItems = cartItems.map((item) => ({
+    name: item.title,
+    price: item.price,
+    quantity: item.quantity,
+    image: item.img,
+  }));
+
+  const handleCheckout = async () => {
+    const res = await fetch("/api/create-checkout-session", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ items: stripeItems }),
+    });
+    const { id: sessionId } = await res.json();
+    const stripe = await stripePromise;
+    if (stripe) stripe.redirectToCheckout({ sessionId });
+  };
   return (
     <section className="px-52 mt-20 min-h-[calc(100vh-370px)]">
       <h1 className="text-3xl">Your Cart</h1>
@@ -53,6 +75,7 @@ const Cart = () => {
       </h1>
       <div className="flex justify-end mt-5 ">
         <Button
+          onClick={handleCheckout}
           className="bg-amber-600 text-white/70 hover:bg-amber-500 px-3 py-2 font-semibold"
           size="lg"
           color="secondary"
