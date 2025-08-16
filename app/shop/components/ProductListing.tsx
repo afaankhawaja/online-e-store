@@ -84,8 +84,8 @@ const ProductListing = () => {
   };
   if (!products) return <div>loading products ...</div>;
   return (
-    <section className="px-32 pt-10 h-full">
-      <p className="text-3xl mt-10">All Products </p>
+    <section className="md:px-32 px-2 pt-10 h-full">
+      <p className="md:text-3xl text-xl mt-10">All Products </p>
       <div className="flex gap-3 mt-8 items-center">
         <select onChange={(e) => handleChnageOption(e)} name="price" id="price">
           <option value="Sort By Price" disabled selected>
