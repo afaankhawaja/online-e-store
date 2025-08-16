@@ -44,7 +44,7 @@ export default function FeaturedProducts() {
   return (
     <div className="px-10 space-y-6">
       <h1 className="text-3xl tracking-wide">Featured Products</h1>
-      <div className="gap-2 gap-y-5 grid grid-cols-2 sm:grid-cols-5">
+      <div className="gap-2 gap-y-10 grid lg:grid-cols-3 xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-3">
         {list.map((item, index) => (
           /* eslint-disable no-console */
           <Card
@@ -53,7 +53,7 @@ export default function FeaturedProducts() {
             shadow="sm"
             onPress={() => console.log("item pressed")}
           >
-            <CardBody className="overflow-visible p-0 h-72 w-60 bg-amber-600/80 rounded-lg">
+            <CardBody className="overflow-hidden p-0 h-72 w-full bg-amber-600/80 rounded-lg">
               <Image
                 alt={item.title}
                 className="w-full object-cover"
@@ -64,7 +64,7 @@ export default function FeaturedProducts() {
                 height="100%"
               />
             </CardBody>
-            <CardFooter className="text-small flex-col gap-y-1 mt-2 items-start text-start max-w-44">
+            <CardFooter className="text-small flex-col gap-y-1 mt-2 items-start text-start max-w-full">
               <b>{item.title}</b>
               <p className="text-default-500">{item.price}</p>
             </CardFooter>

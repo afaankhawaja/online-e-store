@@ -4,12 +4,12 @@ const Contact = () => {
   return (
     <div className="relative flex size-full min-h-screen flex-col bg-white group/design-root overflow-x-hidden">
       <div className="layout-container flex h-full grow flex-col">
-        <div className="px-40 flex flex-1 justify-center py-5">
+        <div className="md:px-32 px-5 flex flex-1 justify-center py-5">
           <div className="layout-content-container flex flex-col max-w-[960px] flex-1">
             <div className="@container">
               <div className="@[480px]:px-4 @[480px]:py-3">
                 <div
-                  className="bg-cover bg-center flex flex-col justify-end overflow-hidden bg-white @[480px]:rounded-lg min-h-[218px]"
+                  className="bg-cover bg-center flex flex-col justify-end overflow-hidden bg-white @[480px]:rounded-lg min-h-[218px] rounded-xl"
                   style={{
                     backgroundImage: `linear-gradient(0deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 25%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuAYUYlhN-L-6mGjxlOw6qNvTWqugIojEwp4FATvRNjVULmp7CuqFEi_NRDdk4zQnESueJC03IyFRwr_IOYcWtbzycgvUSxdsyeF2GdM5rLb6zqDFsKlFpLnSe5211wq3beOKmOr1Npehpmd8A3mtz-QrEFODR7O4RJSWoT9bh_Hm6YssP0yn_oDpbG7WVshBOVazRA0XKtcguZBgxAHZTfgGQhwDdiFQKPn8Oi4R3niYw7DjeLZkrV6un0yuODKbOsGswvZt09Hk-rc");`,
                   }}

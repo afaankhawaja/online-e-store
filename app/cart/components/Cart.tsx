@@ -65,12 +65,12 @@ const Cart = () => {
   };
 
   return (
-    <section className="px-52 mt-20 min-h-[calc(100vh-370px)]">
+    <section className="lg:px-52 px-5 mt-20 min-h-[calc(100vh-370px)] max-w-screen">
       <h1 className="text-3xl">Your Cart</h1>
       <div className="flex-col space-y-5 mt-8">
         {cartItems.map((item, index) => {
           return (
-            <div key={item.id} className="flex justify-between w-full">
+            <div key={item.id} className=" md:flex justify-between w-full">
               <div className="flex items-center gap-x-3">
                 <div className="flex bg-amber-500">
                   <Image
@@ -109,7 +109,7 @@ const Cart = () => {
                   </div>{" "}
                 </div>
               </div>
-              <div>
+              <div className="max-md:text-right">
                 <p>{item.price.toFixed(2)}</p>{" "}
                 <p className="-ml-4">
                   <span className="text-black/70 text-[12px]">

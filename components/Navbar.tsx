@@ -12,8 +12,8 @@ const Navbar = () => {
   const [menuOpen, setMenuOpen] = React.useState(false);
 
   return (
-    <nav className="py-4 px-10 shadow-md">
-      <div className="flex justify-between items-center">
+    <nav className="py-4 px-5 md:px-10 shadow-md max-w-screen">
+      <div className="flex justify-between items-center max-w-screen">
         <div className="flex items-center gap-x-12">
           <h1 className="text-[#171412] text-[20px] leading-[23px] font-bold">
             <Link href={"/"}>

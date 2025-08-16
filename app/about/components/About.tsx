@@ -4,12 +4,12 @@ const About = () => {
   return (
     <div className="relative flex size-full min-h-screen flex-col bg-white group/design-root overflow-x-hidden">
       <div className="layout-container flex h-full grow flex-col">
-        <div className="px-40 flex flex-1 justify-center py-5">
+        <div className="md:px-32 px-5 flex flex-1 justify-center py-5">
           <div className="layout-content-container flex flex-col max-w-[960px] flex-1">
             <div className="@container">
               <div className="@[480px]:px-4 @[480px]:py-3">
                 <div
-                  className="bg-cover bg-center flex flex-col justify-end overflow-hidden bg-white @[480px]:rounded-lg min-h-[218px]"
+                  className="bg-cover bg-center flex flex-col justify-end overflow-hidden bg-white @[480px]:rounded-lg min-h-[218px] rounded-xl"
                   style={{
                     backgroundImage:
                       'linear-gradient(0deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 25%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuDB7fKvYGRVezm68i5LbMN96MBgAsQ_KdeMDrmgdauOz_jZx5e03lnyqTcCRgWygEHCacGSm1atwvWhAGH0VuLCdXWVodFJV5MHefFQ6yGqX0AroO_5QZPPvNISoDNtVOxYL0l9EerD8UuIfxhGGlkFMAh4bQetZHKciZcOlMa3I3gwP4GBmQ2i_-KyKBfh8ZI-rRZq_RrE_yAt5UMMzst-wjhXGDdUIuWAi4-tSrZ3GU3r0ugLwQ2mNAXEpEDxB8WZg8Q-Jj0kHFbA")',

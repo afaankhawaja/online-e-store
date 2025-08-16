@@ -21,7 +21,7 @@ export default function FeaturedCategories() {
   return (
     <div className="px-10 space-y-6">
       <h1 className="text-3xl tracking-wide">Featured Categories</h1>
-      <div className="gap-2 grid grid-cols-3 place-content-center">
+      <div className="gap-2 grid gap-y-8 md:grid-cols-3 place-content-center">
         {list.map((item, index) => (
           /* eslint-disable no-console */
           <Card
