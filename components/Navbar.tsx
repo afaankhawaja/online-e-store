@@ -22,15 +22,15 @@ const Navbar = () => {
             </Link>
           </h1>
           <div className="ml-auto hidden md:flex gap-x-4 text-[14px] text-[#171412] font-medium leading-[21px]">
-            <a href="/shop" className="hover:text-gray-600 px-2 py-2">
+            <Link href="/shop" className="hover:text-gray-600 px-2 py-2">
               Shop
-            </a>
-            <a href="/about" className="hover:text-gray-600 px-2 py-2">
+            </Link>
+            <Link href="/about" className="hover:text-gray-600 px-2 py-2">
               About
-            </a>
-            <a href="/contact" className="hover:text-gray-600 px-2 py-2">
+            </Link>
+            <Link href="/contact" className="hover:text-gray-600 px-2 py-2">
               Contact
-            </a>
+            </Link>
           </div>
         </div>
         {/* Mobile Hamburger */}
@@ -54,27 +54,27 @@ const Navbar = () => {
       {/* Mobile Nav Dropdown */}
       {menuOpen && (
         <div className="md:hidden mt-2 flex flex-col gap-2 bg-white shadow rounded px-4 py-2 z-50 absolute left-0 right-0">
-          <a
+          <Link
             href="/shop"
             className="hover:text-gray-600 px-2 py-2 border-b border-gray-100"
             onClick={() => setMenuOpen(false)}
           >
             Shop
-          </a>
-          <a
+          </Link>
+          <Link
             href="/about"
             className="hover:text-gray-600 px-2 py-2 border-b border-gray-100"
             onClick={() => setMenuOpen(false)}
           >
             About
-          </a>
-          <a
+          </Link>
+          <Link
             href="/contact"
             className="hover:text-gray-600 px-2 py-2"
             onClick={() => setMenuOpen(false)}
           >
             Contact
-          </a>
+          </Link>
         </div>
       )}
     </nav>

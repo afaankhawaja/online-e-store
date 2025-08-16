@@ -1,5 +1,6 @@
 import React from "react";
 import { Facebook, Instagram } from "lucide-react";
+import Link from "next/link";
 
 const Footer = () => {
   return (
@@ -10,12 +11,12 @@ const Footer = () => {
             Aura & <span className="text-red-400">Co</span>
           </div>
           <div className="flex gap-3">
-            <a href="#" aria-label="Instagram">
+            <Link href="#" aria-label="Instagram">
               <Instagram className="hover:text-red-400 transition" />
-            </a>
-            <a href="#" aria-label="Facebook">
+            </Link>
+            <Link href="#" aria-label="Facebook">
               <Facebook className="hover:text-blue-400 transition" />
-            </a>
+            </Link>
           </div>
           <div className="text-xs mt-2 md:mt-4">
             © {new Date().getFullYear()} Aura & Co. All rights reserved.
@@ -30,24 +31,24 @@ const Footer = () => {
               </div>
               <ul className="space-y-1">
                 <li>
-                  <a href="/contact" className="hover:text-red-400 transition">
+                  <Link href="/contact" className="hover:text-red-400 transition">
                     Contact Us
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-red-400 transition">
+                  <Link href="#" className="hover:text-red-400 transition">
                     FAQ
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-red-400 transition">
+                  <Link href="#" className="hover:text-red-400 transition">
                     Returns & Exchanges
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-red-400 transition">
+                  <Link href="#" className="hover:text-red-400 transition">
                     Shipping Info
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -55,33 +56,33 @@ const Footer = () => {
               <div className="font-semibold mb-2 text-[#171412]">Shop</div>
               <ul className="space-y-1">
                 <li>
-                  <a href="/shop" className="hover:text-red-400 transition">
+                  <Link href="/shop" className="hover:text-red-400 transition">
                     All Products
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
+                  <Link
                     href="/category/beauty"
                     className="hover:text-red-400 transition"
                   >
                     Beauty
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
+                  <Link
                     href="/category/fragrance"
                     className="hover:text-red-400 transition"
                   >
                     Fragrance
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
+                  <Link
                     href="/category/groceries"
                     className="hover:text-red-400 transition"
                   >
                     Groceries
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -89,37 +90,37 @@ const Footer = () => {
               <div className="font-semibold mb-2 text-[#171412]">Company</div>
               <ul className="space-y-1">
                 <li>
-                  <a href="/about" className="hover:text-red-400 transition">
+                  <Link href="/about" className="hover:text-red-400 transition">
                     About Us
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-red-400 transition">
+                  <Link href="#" className="hover:text-red-400 transition">
                     Careers
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-red-400 transition">
+                  <Link href="#" className="hover:text-red-400 transition">
                     Blog
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
           </div>
 
           <div className="flex flex-col items-center md:items-end gap-2 md:w-1/4 mt-6 md:mt-0">
-            <a
+            <Link
               href="#"
               className="hover:text-red-400 transition mt-[7px] md:mt-[31.5px]"
             >
               Privacy Policy
-            </a>
-            <a href="#" className="hover:text-red-400 transition">
+            </Link>
+            <Link href="#" className="hover:text-red-400 transition">
               Terms of Service
-            </a>
-            <a href="#" className="hover:text-red-400 transition">
+            </Link>
+            <Link href="#" className="hover:text-red-400 transition">
               Accessibility
-            </a>
+            </Link>
           </div>
         </div>
       </div>
