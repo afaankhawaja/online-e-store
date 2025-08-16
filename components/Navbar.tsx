@@ -1,7 +1,7 @@
 "use client";
 import { cartAtom } from "@/atoms/cart-atom";
 import { useAtom } from "jotai";
-import { Search, ShoppingBag } from "lucide-react";
+import { Search, ShoppingBag, Menu, X } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React from "react";
@@ -9,6 +9,8 @@ import React from "react";
 const Navbar = () => {
   const router = useRouter();
   const [cartItems] = useAtom(cartAtom);
+  const [menuOpen, setMenuOpen] = React.useState(false);
+
   return (
     <nav className="py-4 px-10 shadow-md">
       <div className="flex justify-between items-center">
@@ -19,7 +21,7 @@ const Navbar = () => {
               Aura & <span className="text-red-400">Co</span>
             </Link>
           </h1>
-          <div className="ml-auto flex gap-x-4 text-[14px] text-[#171412] font-medium leading-[21px]">
+          <div className="ml-auto hidden md:flex gap-x-4 text-[14px] text-[#171412] font-medium leading-[21px]">
             <a href="/shop" className="hover:text-gray-600 px-2 py-2">
               Shop
             </a>
@@ -31,17 +33,50 @@ const Navbar = () => {
             </a>
           </div>
         </div>
-        <div className="flex items-center space-x-4">
-          <Search size={20} />
-
+        {/* Mobile Hamburger */}
+        <div className="flex items-center space-x-4 md:space-x-4">
+          <Search size={20} className="hidden md:block" />
           <div className="flex-col -mt-[25px]">
             <span className="text-[10px] -mb-2 px-1 text-white ml-3 w-fit h-fit rounded-[50%] text-center bg-red-500">
               {cartItems.length}
             </span>
             <ShoppingBag onClick={() => router.push("/cart")} size={20} />
           </div>
+          <button
+            className="md:hidden flex items-center justify-center p-2 transition-all duration-300"
+            aria-label="Open menu"
+            onClick={() => setMenuOpen((prev) => !prev)}
+          >
+            {menuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
         </div>
       </div>
+      {/* Mobile Nav Dropdown */}
+      {menuOpen && (
+        <div className="md:hidden mt-2 flex flex-col gap-2 bg-white shadow rounded px-4 py-2 z-50 absolute left-0 right-0">
+          <a
+            href="/shop"
+            className="hover:text-gray-600 px-2 py-2 border-b border-gray-100"
+            onClick={() => setMenuOpen(false)}
+          >
+            Shop
+          </a>
+          <a
+            href="/about"
+            className="hover:text-gray-600 px-2 py-2 border-b border-gray-100"
+            onClick={() => setMenuOpen(false)}
+          >
+            About
+          </a>
+          <a
+            href="/contact"
+            className="hover:text-gray-600 px-2 py-2"
+            onClick={() => setMenuOpen(false)}
+          >
+            Contact
+          </a>
+        </div>
+      )}
     </nav>
   );
 };
