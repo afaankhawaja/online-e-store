@@ -1,7 +1,9 @@
 "use client";
 import { Card, CardBody, CardFooter, Image } from "@heroui/react";
+import { useRouter } from "next/navigation";
 
 export default function FeaturedProducts() {
+  const router = useRouter();
   const list = [
     {
       title: "Essence Mascara Lash Princess",
@@ -51,7 +53,10 @@ export default function FeaturedProducts() {
             className="flex-col hover:cursor-pointer"
             key={index}
             shadow="sm"
-            onPress={() => console.log("item pressed")}
+            isPressable
+            onPress={() => {
+              router.push(`/product-detail/${1}`);
+            }}
           >
             <CardBody className="overflow-hidden p-0 h-72 w-full bg-amber-600/80 rounded-lg">
               <Image

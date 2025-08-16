@@ -4,6 +4,7 @@ import { Card, CardBody, CardFooter, Image } from "@heroui/react";
 import { Funnel, Minus, Plus, ShoppingCart } from "lucide-react";
 import { useAtom } from "jotai";
 import { cartAtom } from "@/atoms/cart-atom";
+import { useRouter } from "next/navigation";
 
 interface Cart {
   id: number;
@@ -31,7 +32,7 @@ interface Product {
 const ProductListing = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [cartItems, setCartItems] = useAtom(cartAtom);
-
+  const router = useRouter();
   useEffect(() => {
     const fetchProducts = async () => {
       const response = await fetch(`https://dummyjson.com/products`);
@@ -139,7 +140,10 @@ const ProductListing = () => {
               className="flex-col hover:cursor-pointer"
               key={index}
               shadow="sm"
-              onPress={() => console.log("item pressed")}
+              isPressable
+              onPress={() => {
+                router.push(`/product-detail/${item.id}`);
+              }}
             >
               <CardBody className="overflow-hidden p-0 h-72 w-full bg-amber-600/80 rounded-lg">
                 <Image

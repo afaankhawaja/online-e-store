@@ -12,6 +12,7 @@ import SelectOptions from "@/components/ui/Select";
 import { Minus, Plus, ShoppingCart } from "lucide-react";
 import { useAtom } from "jotai";
 import { cartAtom } from "@/atoms/cart-atom";
+import { useRouter } from "next/navigation";
 
 interface CategoryProductsProps {
   category: string;
@@ -43,6 +44,7 @@ interface Product {
 const CategoryProducts = ({ category }: CategoryProductsProps) => {
   const [products, setProducts] = useState<Product[]>([]);
   const [cartItems, setCartItems] = useAtom(cartAtom);
+  const router = useRouter();
   const categoryName =
     category.charAt(0).toLocaleLowerCase() + category.slice(1);
   useEffect(() => {
@@ -122,7 +124,10 @@ const CategoryProducts = ({ category }: CategoryProductsProps) => {
               className="flex-col hover:cursor-pointer"
               key={index}
               shadow="sm"
-              onPress={() => console.log("item pressed")}
+              isPressable
+              onPress={() => {
+                router.push(`/product-detail/${item.id}`);
+              }}
             >
               <CardBody className="overflow-hidden p-0 h-72 w-full bg-amber-600/80 rounded-lg">
                 <Image
