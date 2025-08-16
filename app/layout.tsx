@@ -37,7 +37,9 @@ export default function RootLayout({
             <Navbar />
           </div>
           {children}
-          <Footer />
+          <div className="mt-10 ">
+            <Footer />
+          </div>
         </Provider>
       </body>
     </html>
