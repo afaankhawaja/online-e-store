@@ -34,23 +34,16 @@ const ProductListing = () => {
   }, []);
 
   const handleChnageOption = (e: any) => {
-    const order = e.target.value;
-    const title = e.target.name;
-    const fetchProducts = async () => {
-      const response = await fetch(
-        `https://dummyjson.com/products?sortBy=${title}&${order}`,
-      );
-      const data = await response.json();
-      const products = data.products;
-      const productsWithQuantity = products.map((prod: any) => {
-        return {
-          ...prod,
-          quantity: 1,
-        };
-      });
-      setProducts(productsWithQuantity);
-    };
-    fetchProducts();
+    const orderBy = e.target.value;
+    const orderOf = e.target.name;
+    const sortedProducts = products.slice().sort((a, b) => {
+      let comparison = 0;
+      if (orderOf === "title") comparison = a.title.localeCompare(b.title);
+      else if (orderOf === "price") comparison = a.price - b.price;
+      if (orderBy === "desc") comparison = -comparison;
+      return comparison;
+    });
+    setProducts(sortedProducts);
   };
 
   const updateQuantity = (id: string, delta: number) => {
@@ -99,7 +92,7 @@ const ProductListing = () => {
             Sort by Price
           </option>
           <option value="asc">ASC</option>
-          <option value="dsc">DESC</option>
+          <option value="desc">DESC</option>
         </select>
 
         <select onChange={(e) => handleChnageOption(e)} name="title" id="title">
