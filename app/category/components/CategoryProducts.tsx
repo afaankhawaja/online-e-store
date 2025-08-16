@@ -18,15 +18,30 @@ interface CategoryProductsProps {
 }
 
 interface Cart {
-  id: string;
+  id: number;
   title: string;
   price: number;
   quantity: number;
   img: string;
 }
 
+interface Product {
+  id: number;
+  title: string;
+  description?: string;
+  price?: number;
+  discountPercentage?: number;
+  rating?: number;
+  stock?: number;
+  brand?: string;
+  category?: string;
+  thumbnail?: string;
+  images: string[] | "";
+  quantity: number;
+}
+
 const CategoryProducts = ({ category }: CategoryProductsProps) => {
-  const [products, setProducts] = useState<any[]>([]);
+  const [products, setProducts] = useState<Product[]>([]);
   const [cartItems, setCartItems] = useAtom(cartAtom);
   const categoryName =
     category.charAt(0).toLocaleLowerCase() + category.slice(1);
@@ -37,7 +52,7 @@ const CategoryProducts = ({ category }: CategoryProductsProps) => {
       );
       const data = await response.json();
       const products = data.products;
-      const productsWithQuantity = products.map((prod: any) => {
+      const productsWithQuantity = products.map((prod: Product) => {
         return {
           ...prod,
           quantity: 1,
@@ -48,7 +63,7 @@ const CategoryProducts = ({ category }: CategoryProductsProps) => {
     fetchProducts();
   }, [categoryName]);
 
-  const updateQuantity = (id: string, delta: number) => {
+  const updateQuantity = (id: number, delta: number) => {
     setProducts((prevProds) =>
       prevProds.map((prod) =>
         prod.id === id
@@ -58,7 +73,7 @@ const CategoryProducts = ({ category }: CategoryProductsProps) => {
     );
   };
 
-  const handleAddToCart = (item: any) => {
+  const handleAddToCart = (item: Product) => {
     setCartItems((prevItems: Cart[]) => {
       const alreadyExist = prevItems.find((prod) => prod.id === item.id);
       if (alreadyExist) {
@@ -77,7 +92,7 @@ const CategoryProducts = ({ category }: CategoryProductsProps) => {
             id: item.id,
             title: item.title,
             quantity: item.quantity,
-            price: item.price,
+            price: item.price ?? 0,
             img: item.images[0],
           },
         ];

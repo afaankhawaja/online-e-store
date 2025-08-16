@@ -1,20 +1,35 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import { Card, CardBody, CardFooter, Image } from "@heroui/react";
 import { Funnel, Minus, Plus, ShoppingCart } from "lucide-react";
 import { useAtom } from "jotai";
 import { cartAtom } from "@/atoms/cart-atom";
 
 interface Cart {
-  id: string;
+  id: number;
   title: string;
   price: number;
   quantity: number;
   img: string;
 }
 
+interface Product {
+  id: number;
+  title: string;
+  description?: string;
+  price: number;
+  discountPercentage?: number;
+  rating?: number;
+  stock?: number;
+  brand?: string;
+  category?: string;
+  thumbnail?: string;
+  images: string[] | "";
+  quantity: number;
+}
+
 const ProductListing = () => {
-  const [products, setProducts] = useState<any[]>([]);
+  const [products, setProducts] = useState<Product[]>([]);
   const [cartItems, setCartItems] = useAtom(cartAtom);
 
   useEffect(() => {
@@ -22,7 +37,7 @@ const ProductListing = () => {
       const response = await fetch(`https://dummyjson.com/products`);
       const data = await response.json();
       const products = data.products;
-      const productsWithQuantity = products.map((prod: any) => {
+      const productsWithQuantity = products.map((prod: Product) => {
         return {
           ...prod,
           quantity: 1,
@@ -33,7 +48,7 @@ const ProductListing = () => {
     fetchProducts();
   }, []);
 
-  const handleChnageOption = (e: any) => {
+  const handleChnageOption = (e: ChangeEvent<HTMLSelectElement>) => {
     const orderBy = e.target.value;
     const orderOf = e.target.name;
     const sortedProducts = products.slice().sort((a, b) => {
@@ -46,7 +61,7 @@ const ProductListing = () => {
     setProducts(sortedProducts);
   };
 
-  const updateQuantity = (id: string, delta: number) => {
+  const updateQuantity = (id: number, delta: number) => {
     setProducts((prevProds) =>
       prevProds.map((prod) =>
         prod.id === id
@@ -56,7 +71,7 @@ const ProductListing = () => {
     );
   };
 
-  const handleAddToCart = (item: any) => {
+  const handleAddToCart = (item: Product) => {
     setCartItems((prevItems: Cart[]) => {
       const alreadyExist = prevItems.find((prod) => prod.id === item.id);
       if (alreadyExist) {
@@ -87,16 +102,27 @@ const ProductListing = () => {
     <section className="md:px-32 px-2 pt-10 h-full">
       <p className="md:text-3xl text-xl mt-10">All Products </p>
       <div className="flex gap-3 mt-8 items-center">
-        <select onChange={(e) => handleChnageOption(e)} name="price" id="price">
-          <option value="Sort By Price" disabled selected>
+        <select
+          defaultChecked
+          defaultValue="Sort By Price"
+          onChange={(e) => handleChnageOption(e)}
+          name="price"
+          id="price"
+        >
+          <option value="Sort By Price" disabled>
             Sort by Price
           </option>
           <option value="asc">ASC</option>
           <option value="desc">DESC</option>
         </select>
 
-        <select onChange={(e) => handleChnageOption(e)} name="title" id="title">
-          <option value="Sort By Price" disabled selected>
+        <select
+          defaultValue="Sort By Alphabets"
+          onChange={(e) => handleChnageOption(e)}
+          name="title"
+          id="title"
+        >
+          <option value="Sort By Alphabets" disabled>
             Alphabetically
           </option>
           <option value="asc">ASC</option>

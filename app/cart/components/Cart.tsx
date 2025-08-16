@@ -1,14 +1,14 @@
 "use client";
 import { cartAtom } from "@/atoms/cart-atom";
 import { useAtom } from "jotai";
-import React, { useEffect, useMemo } from "react";
+import React, { useMemo } from "react";
 import Image from "next/image";
 import { Button } from "@heroui/button";
 import { loadStripe } from "@stripe/stripe-js";
 import { Minus, Plus, Trash } from "lucide-react";
 
 interface CartItems {
-  id: string;
+  id: number;
   title: string;
   price: number;
   quantity: number;
@@ -45,7 +45,7 @@ const Cart = () => {
     if (stripe) stripe.redirectToCheckout({ sessionId });
   };
 
-  const updateQuantity = (id: string, delta: number) => {
+  const updateQuantity = (id: number, delta: number) => {
     setCartItems((prevItems: CartItems[]) =>
       prevItems.map((item) =>
         item.id === id
@@ -58,7 +58,7 @@ const Cart = () => {
     );
   };
 
-  const handleDelete = (id: string) => {
+  const handleDelete = (id: number) => {
     setCartItems((prevItems: CartItems[]) =>
       prevItems.filter((item) => item.id !== id),
     );
@@ -68,7 +68,7 @@ const Cart = () => {
     <section className="lg:px-52 px-5 mt-20 min-h-[calc(100vh-370px)] max-w-screen">
       <h1 className="text-3xl">Your Cart</h1>
       <div className="flex-col space-y-5 mt-8">
-        {cartItems.map((item, index) => {
+        {cartItems.map((item) => {
           return (
             <div key={item.id} className=" md:flex justify-between w-full">
               <div className="flex items-center gap-x-3">
@@ -89,7 +89,7 @@ const Cart = () => {
                         <Plus
                           size={14}
                           id="add"
-                          onClick={(e) => updateQuantity(item.id, 1)}
+                          onClick={() => updateQuantity(item.id, 1)}
                         />{" "}
                         <Minus
                           size={14}

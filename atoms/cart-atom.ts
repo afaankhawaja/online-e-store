@@ -1,7 +1,7 @@
 import { atom } from "jotai";
 
 interface Cart {
-  id: string;
+  id: number;
   title: string;
   price: number;
   quantity: number;
