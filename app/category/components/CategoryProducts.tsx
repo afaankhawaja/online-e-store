@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import {
   Breadcrumbs,
   BreadcrumbItem,
@@ -30,7 +30,7 @@ interface Product {
   id: number;
   title: string;
   description?: string;
-  price?: number;
+  price: number;
   discountPercentage?: number;
   rating?: number;
   stock?: number;
@@ -101,19 +101,54 @@ const CategoryProducts = ({ category }: CategoryProductsProps) => {
       }
     });
   };
+  const handleChnageOption = (e: ChangeEvent<HTMLSelectElement>) => {
+    const orderBy = e.target.value;
+    const orderOf = e.target.name;
+    const sortedProducts = products.slice().sort((a, b) => {
+      let comparison = 0;
+      if (orderOf === "title") comparison = a.title.localeCompare(b.title);
+      else if (orderOf === "price") comparison = a.price - b.price;
+      if (orderBy === "desc") comparison = -comparison;
+      return comparison;
+    });
+    setProducts(sortedProducts);
+  };
   if (!products) return <div>loading products ...</div>;
   return (
-    <section className="px-32 pt-10 h-full">
+    <section className="md:px-32 px-5 pt-10 h-full">
       <Breadcrumbs isDisabled>
         <BreadcrumbItem className="text-[#877563]">Category</BreadcrumbItem>
         <BreadcrumbItem className="text-[#171412]">{category}</BreadcrumbItem>
       </Breadcrumbs>
 
       <h1 className="text-3xl mt-10">{category} </h1>
-      <div className="flex gap-3 mt-8">
-        <SelectOptions options={[]} placeholder="Sort By" />
-        <SelectOptions options={[]} placeholder="Price" />
-        <SelectOptions options={[]} placeholder="Material" />
+      <div className="flex gap-3 mt-8 items-center">
+        <select
+          defaultChecked
+          defaultValue="Sort By Price"
+          onChange={(e) => handleChnageOption(e)}
+          name="price"
+          id="price"
+        >
+          <option value="Sort By Price" disabled>
+            Sort by Price
+          </option>
+          <option value="asc">ASC</option>
+          <option value="desc">DESC</option>
+        </select>
+
+        <select
+          defaultValue="Sort By Alphabets"
+          onChange={(e) => handleChnageOption(e)}
+          name="title"
+          id="title"
+        >
+          <option value="Sort By Alphabets" disabled>
+            Alphabetically
+          </option>
+          <option value="asc">ASC</option>
+          <option value="desc">DESC</option>
+        </select>
       </div>
 
       <div className="gap-2 gap-y-10 grid lg:grid-cols-3 xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-3 mt-8">
