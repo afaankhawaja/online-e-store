@@ -1,6 +1,20 @@
+"use client";
 import React from "react";
 
 const Contact = () => {
+  const [form, setForm] = React.useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+  };
   return (
     <div className="relative flex size-full min-h-screen flex-col bg-white group/design-root overflow-x-hidden">
       <div className="layout-container flex h-full grow flex-col">
@@ -28,9 +42,11 @@ const Contact = () => {
                   Name
                 </p>
                 <input
+                  name="name"
                   placeholder="Your Name"
                   className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#181411] focus:outline-0 focus:ring-0 border border-[#e5e0dc] bg-white focus:border-[#e5e0dc] h-14 placeholder:text-[#887563] p-[15px] text-base font-normal leading-normal"
-                  value=""
+                  value={form.name}
+                  onChange={handleChange}
                 />
               </label>
             </div>
@@ -40,8 +56,11 @@ const Contact = () => {
                   Email
                 </p>
                 <input
+                  name="email"
                   placeholder="Your Email"
                   className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#181411] focus:outline-0 focus:ring-0 border border-[#e5e0dc] bg-white focus:border-[#e5e0dc] h-14 placeholder:text-[#887563] p-[15px] text-base font-normal leading-normal"
+                  value={form.email}
+                  onChange={handleChange}
                 />
               </label>
             </div>
@@ -51,8 +70,11 @@ const Contact = () => {
                   Subject
                 </p>
                 <input
+                  name="subject"
                   placeholder="Subject"
                   className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#181411] focus:outline-0 focus:ring-0 border border-[#e5e0dc] bg-white focus:border-[#e5e0dc] h-14 placeholder:text-[#887563] p-[15px] text-base font-normal leading-normal"
+                  value={form.subject}
+                  onChange={handleChange}
                 />
               </label>
             </div>
@@ -62,8 +84,11 @@ const Contact = () => {
                   Message
                 </p>
                 <textarea
+                  name="message"
                   placeholder="Your Message"
                   className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#181411] focus:outline-0 focus:ring-0 border border-[#e5e0dc] bg-white focus:border-[#e5e0dc] min-h-36 placeholder:text-[#887563] p-[15px] text-base font-normal leading-normal"
+                  value={form.message}
+                  onChange={handleChange}
                 ></textarea>
               </label>
             </div>
