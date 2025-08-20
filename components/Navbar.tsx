@@ -4,7 +4,8 @@ import { useAtom } from "jotai";
 import { Search, ShoppingBag, Menu, X } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useState } from "react";
+import SearchDropdown from "./SearchDropdown";
 
 const Navbar = () => {
   const router = useRouter();
@@ -34,8 +35,10 @@ const Navbar = () => {
           </div>
         </div>
         {/* Mobile Hamburger */}
-        <div className="flex items-center space-x-4 md:space-x-4">
-          <Search size={20} className="hidden md:block" />
+        <div className="flex items-center space-x-4 md:space-x-4 transition-all duration-500">
+          <div className="hidden md:block">
+            <SearchDropdown />
+          </div>
           <div className="flex-col -mt-[25px]">
             <span className="text-[10px] -mb-2 px-1 text-white ml-3 w-fit h-fit rounded-[50%] text-center bg-red-500">
               {cartItems.length}
@@ -70,11 +73,14 @@ const Navbar = () => {
           </Link>
           <Link
             href="/contact"
-            className="hover:text-gray-600 px-2 py-2"
+            className="hover:text-gray-600 px-2 py-2 border-b border-gray-100"
             onClick={() => setMenuOpen(false)}
           >
             Contact
           </Link>
+          <div className="md:hidden px-2 py-2 block">
+            <SearchDropdown />
+          </div>
         </div>
       )}
     </nav>
