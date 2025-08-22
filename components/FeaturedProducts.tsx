@@ -53,7 +53,7 @@ export default function FeaturedProducts() {
                 router.push(`/product-detail/${item.id}`);
               }}
             >
-              <CardBody className="overflow-hidden p-0 h-72 w-full bg-amber-600/80 rounded-lg">
+              <CardBody className="overflow-hidden justify-center p-0 h-72 w-full bg-amber-600/70 rounded-lg">
                 <Image
                   alt={item.title}
                   className="w-full object-cover"
@@ -61,7 +61,7 @@ export default function FeaturedProducts() {
                   shadow="sm"
                   src={item.images[0]}
                   width="100%"
-                  height="100%"
+                  height="100%"        
                 />
               </CardBody>
               <CardFooter className="text-small flex-col gap-y-1 mt-2 items-start text-start max-w-full">

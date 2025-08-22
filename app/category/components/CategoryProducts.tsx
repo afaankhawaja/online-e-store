@@ -164,7 +164,7 @@ const CategoryProducts = ({ category }: CategoryProductsProps) => {
                 router.push(`/product-detail/${item.id}`);
               }}
             >
-              <CardBody className="overflow-hidden p-0 h-72 w-full bg-amber-600/80 rounded-lg">
+              <CardBody className="overflow-hidden justify-center p-0 h-72 w-full bg-amber-600/80 rounded-lg">
                 <Image
                   alt={item.title}
                   className="w-full object-cover"
