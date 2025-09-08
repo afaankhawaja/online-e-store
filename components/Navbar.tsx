@@ -23,6 +23,9 @@ const Navbar = () => {
             </Link>
           </h1>
           <div className="ml-auto hidden md:flex gap-x-4 text-[14px] text-[#171412] font-medium leading-[21px]">
+            <Link href="/" className="hover:text-gray-600 px-2 py-2">
+              Home
+            </Link>
             <Link href="/shop" className="hover:text-gray-600 px-2 py-2">
               Shop
             </Link>
