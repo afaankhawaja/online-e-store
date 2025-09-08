@@ -42,7 +42,7 @@ const Navbar = () => {
           <div className="hidden md:block">
             <SearchDropdown />
           </div>
-          <div className="flex-col -mt-[25px]">
+          <div className="flex-col -mt-[25px] cursor-pointer">
             <span className="text-[10px] -mb-2 px-1 text-white ml-3 w-fit h-fit rounded-[50%] text-center bg-red-500">
               {cartItems.length}
             </span>
