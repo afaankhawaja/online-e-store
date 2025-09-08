@@ -1,13 +1,19 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import Image from "next/image";
-import Bg from "@/assets/other/hero-bg.jpg";
 import { Button } from "@heroui/button";
 const Hero = () => {
+  const [imageIndex, SetImageIndex] = useState(0);
+
+  setTimeout(() => {
+    SetImageIndex((imageIndex + 1) % 7);
+  }, 1800);
+  
   return (
     <header>
       <div className="relative w-[calc(100%-40px)] mx-auto m-10 rounded-2xl h-[70vh]">
         <Image
-          src={Bg}
+          src={`/images/hero-img-${imageIndex}.jpg`}
           alt="Background Image"
           fill
           className=" object-cover rounded-xl"
