@@ -61,6 +61,13 @@ const Navbar = () => {
       {menuOpen && (
         <div className="md:hidden mt-2 flex flex-col gap-2 bg-white shadow rounded px-4 py-2 z-50 absolute left-0 right-0">
           <Link
+            href="/"
+            className="hover:text-gray-600 px-2 py-2 border-b border-gray-100"
+            onClick={() => setMenuOpen(false)}
+          >
+            Home
+          </Link>
+          <Link
             href="/shop"
             className="hover:text-gray-600 px-2 py-2 border-b border-gray-100"
             onClick={() => setMenuOpen(false)}
